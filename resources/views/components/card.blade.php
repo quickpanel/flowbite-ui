@@ -1,6 +1,6 @@
 @props([
     'padding' => 'p-6',
-    'shadow' => 'shadow-sm',
+    'shadow' => 'sm',
     'rounded' => 'rounded-lg',
     'border' => true,
     'header' => null,
