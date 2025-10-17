@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'prefix' => 'flowbite',
     /*
     |--------------------------------------------------------------------------
     | FlowBite UI Configuration

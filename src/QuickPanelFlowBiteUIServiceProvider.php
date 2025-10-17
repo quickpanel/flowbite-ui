@@ -35,6 +35,13 @@ class QuickPanelFlowBiteUIServiceProvider extends ServiceProvider
         // Load views
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'flowbite-ui');
 
+        // Register configurable Blade anonymous components prefix
+        $prefix = config('flowbite-ui.prefix', 'flowbite');
+        if (method_exists(Blade::class, 'anonymousComponentPath')) {
+            // Allow usage like: <x-{$prefix}::button />
+            Blade::anonymousComponentPath(__DIR__.'/../resources/views/components', $prefix);
+        }
+
         // Register Livewire components
         $this->loadLivewireComponents();
     }
@@ -45,14 +52,14 @@ class QuickPanelFlowBiteUIServiceProvider extends ServiceProvider
     protected function loadLivewireComponents(): void
     {
         $componentsPath = __DIR__.'/../src/Components';
-        
+
         if (is_dir($componentsPath)) {
             $files = glob($componentsPath.'/*.php');
-            
+
             foreach ($files as $file) {
                 $className = basename($file, '.php');
                 $fullClassName = "QuickPanel\\FlowBiteUI\\Components\\{$className}";
-                
+
                 if (class_exists($fullClassName)) {
                     \Livewire\Livewire::component($className, $fullClassName);
                 }

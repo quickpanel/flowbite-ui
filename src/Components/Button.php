@@ -24,29 +24,6 @@ class Button extends Component
         $this->text = $text;
     }
 
-    public function handleClick()
-    {
-        if (!$this->disabled) {
-            $this->dispatch('button-clicked', [
-                'variant' => $this->variant,
-                'color' => $this->color,
-                'size' => $this->size
-            ]);
-        }
-    }
-
-    #[On('enable-button')]
-    public function enableButton()
-    {
-        $this->disabled = false;
-    }
-
-    #[On('disable-button')]
-    public function disableButton()
-    {
-        $this->disabled = true;
-    }
-
     public function render()
     {
         return view('flowbite-ui::components.button');
