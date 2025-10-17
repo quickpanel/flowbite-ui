@@ -37,7 +37,7 @@
     @if($header)
         <div class="mb-4 pb-4 border-b border-gray-200 dark:border-gray-700 rtl:border-r-0 rtl:border-l-0">
             <div class="flex items-center justify-between rtl:flex-row-reverse">
-                <div class="flex-1 rtl:text-right">
+                <div class="flex-1 rtl:text-right text-gray-900 dark:text-gray-50">
                     {{ $header }}
                 </div>
                 @if($collapsed !== null)
@@ -63,7 +63,7 @@
 
     @if($footer)
         <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 rtl:border-r-0 rtl:border-l-0">
-            <div class="text-gray-600 dark:text-gray-300 rtl:text-right">
+            <div class="text-gray-900 dark:text-gray-50 rtl:text-right">
                 {{ $footer }}
             </div>
         </div>
