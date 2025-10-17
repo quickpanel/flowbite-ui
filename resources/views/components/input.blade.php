@@ -7,7 +7,8 @@
     'error' => false,
     'label' => null,
     'placeholder' => null,
-    'required' => false
+    'required' => false,
+    'value' => null,
 ])
 
 @php
@@ -41,6 +42,20 @@
     if ($disabled) {
         $inputClasses .= ' opacity-50 cursor-not-allowed';
     }
+
+    // Determine the input's value with precedence:
+    // 1) explicit value attribute/prop; 2) slot content; 3) old input for wire:model name
+    $explicitValue = $attributes->get('value');
+    $slotHasContent = isset($slot) && trim((string) $slot) !== '';
+    $finalValue = null;
+
+    if (!is_null($explicitValue)) {
+        $finalValue = $explicitValue;
+    } elseif ($slotHasContent) {
+        $finalValue = (string) $slot;
+    } elseif (!empty($name)) {
+        $finalValue = old($name);
+    }
 @endphp
 
 <div class="mb-4">
@@ -59,7 +74,7 @@
         @if($placeholder) placeholder="{{ $placeholder }}" @endif
         @if($disabled) disabled @endif
         @if($required) required @endif
-        @isset($slot) value="{{ $slot }}" @endisset
+        @if(!is_null($finalValue)) value="{{ $finalValue }}" @endif
         @isset ($name) name="{{ $name }}" @endisset
     />
 
