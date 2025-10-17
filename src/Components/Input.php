@@ -25,7 +25,7 @@ class Input extends Component
         'value.max' => 'This field cannot exceed 255 characters.',
     ];
 
-    public function mount($type = 'text', $size = 'md', $color = 'gray', $disabled = false, $error = false, $label = null, $placeholder = null, $required = false, $value = null)
+    public function mount($type = 'text', $size = 'md', $color = 'gray', $disabled = false, $error = false, $label = null, $placeholder = null, $required = false)
     {
         $this->type = $type;
         $this->size = $size;
@@ -35,7 +35,6 @@ class Input extends Component
         $this->label = $label;
         $this->placeholder = $placeholder;
         $this->required = $required;
-        $this->value = $value ?? '';
     }
 
     public function updatedValue()
@@ -48,12 +47,6 @@ class Input extends Component
     {
         $this->value = '';
         $this->error = false;
-    }
-
-    #[On('clear-input')]
-    public function clearInput()
-    {
-        $this->clear();
     }
 
     public function render()
